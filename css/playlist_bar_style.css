@@ -1,0 +1,251 @@
+/* playlist content */
+.playlist {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    left: 0;
+    color: #ffff;
+    overflow: hidden;
+    transition: width .1s linear, left .2s ease-out;
+    cursor: default;
+    -webkit-backdrop-filter: blur(490px); /* para o gnome web */
+    box-sizing: border-box;
+    backdrop-filter: blur(490px);
+    background-color: rgba(0, 0, 0, 0.267);
+}
+.playlist.playlist-off {
+    width: 0;
+    left: -25%;
+}
+.playlist header {
+    display: flex;
+    height: 48px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    padding-bottom: 20px;
+}
+.playlist header .icons span {
+    font-size: larger;
+    padding: 6px;
+    border-radius: 6px;
+}
+header .icons  .close-playlist--button {
+    display: none;
+}
+.playlist header .icons span:hover {
+    background-color: rgba(252, 252, 252, 0.144);
+}
+.playlist header h1 {
+    font-family: hindBold;
+    font-size: medium;
+}
+.playlist header h2 {
+    font-family: hindLight;
+    font-size: small;
+}
+.playlist ul {
+    height: 100%;
+    position: relative;
+    padding: 0 2px;
+    list-style: none;
+    overflow-y: auto;
+}
+.playlist .search-bar-container {
+    display: none;
+    justify-content: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(252, 252, 252, 0.144);
+    box-sizing: border-box;
+    background-color: rgba(17, 17, 17, 0.137);
+}
+.search-bar {
+    width: 210px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    outline: 2px solid rgba(252, 252, 252, 0.541);
+    /* 
+    outline-offset: 5px;
+    outline-offset: 5px; 
+    */
+    box-sizing: border-box;
+    overflow: hidden;
+    -webkit-backdrop-filter: invert(100%) opacity(38%); /* para o gnome web */
+    backdrop-filter: invert(100%) opacity(38%);
+    background-color: transparent;
+}
+.search-bar span {
+    font-size: larger;
+    color: #ffff;
+}
+.search-bar input {
+    width: 145px;
+    height: 15px;
+    font-family: hindLight;
+    font-size: medium;
+    color: #ffff;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+/* chrome */
+.playlist ul::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 12px;
+    background-color: rgba(252, 252, 252, 0.144);
+}
+.playlist ul::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    background-color: gray;
+}
+.playlist ul::-webkit-scrollbar-track {
+    border-radius: 12px;
+    outline: 1px solid rgba(17, 17, 17, 0.5);
+}
+.playlist ul li {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin: 0 0 2px;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+.playlist ul li:hover {
+    background-color: rgba(252, 252, 252, 0.144);
+}
+.playlist ul li h1 {
+    width: 230px;
+    height: 20px;
+    font-family: hindBold;
+    font-size: small;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.playlist ul li h2 {
+    width: 230px;
+    height: 20px;
+    font-family: hindLight;
+    font-size: smaller;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+/* checkbox buttons */
+.checkbox-container {
+    height: 30px;
+    display: none;
+    position: relative;
+    padding-left: 35px;
+    padding-right: 5%;
+    overflow: hidden;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+.checkbox-container input {
+    width: 0;
+    height: 0;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkbox-container .checkmark {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 2px solid rgba(252, 252, 252, 0.144);
+    border-radius: 16px;
+}
+.checkbox-container input:checked ~ .checkmark {
+    border-color: #2196F3;
+    background-color: #2196F3;
+}
+.checkbox-container .checkmark::after {
+    content: "";
+    display: none;
+    position: absolute;
+}
+.checkbox-container input:checked ~ .checkmark::after {
+    display: block;
+}
+.checkbox-container .checkmark::after {
+    width: 5px;
+    height: 10px;
+    top: 5px;
+    left: 9px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+/* music album art */
+.music-art {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin-right: 5%;
+    overflow: hidden;
+    border-radius: 4px;
+}
+.music-art img {
+    width: 100%;
+}
+.music-info {
+    height: 40px;
+    overflow: hidden;
+}
+.playlist-footer {
+    height: 50px;
+    display: none;
+    justify-content: space-between;
+    padding: 12px;
+    border-top: 1px solid rgba(252, 252, 252, 0.144);
+    box-sizing: border-box;
+}
+.playlist-footer p {
+    font-family: hindLight;
+    font-size: small;
+    padding: 6px;
+}
+.playlist-footer span {
+    font-size: 16pt;
+    padding: 6px;
+    border-radius: 6px;
+}
+.playlist-footer span:hover {
+    background-color: rgba(252, 252, 252, 0.144);
+}
+/* display select option */
+.active {
+    background-color: rgba(252, 252, 252, 0.144);
+}
+
+@media screen and (max-width: 1028px) {
+    .playlist {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        transition: left .2s ease-out;
+        z-index: 99;
+        background-color: #242424;
+    }
+    .playlist.playlist-off {
+        width: 100%;
+        left: -100%;
+    }
+    header .icons  .close-playlist--button {
+        display: inline;
+    }
+}
