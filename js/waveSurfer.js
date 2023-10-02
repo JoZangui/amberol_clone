@@ -14,7 +14,6 @@ const artist = document.querySelector('.artist');
 const musicAlbum = document.querySelector('.music-album');
 const cover = document.querySelector('.album-art');
 const body = document.querySelector('body');
-let currentSong = 0;
 const playPauseButton = document.querySelector('.play-pause--button');
 const playPauseIcon = document.querySelector('.play-pause--icon');
 const backwardButton = document.querySelector('.backward-button');
@@ -35,12 +34,23 @@ const wavesurfer = WaveSurfer.create({
 });
 
 audio.onloadedmetadata = () => {
+    let musicIndex;
+    let numberOfPlaylistItems = playlistContainer.childElementCount
     playlist = uploadedMusicList.songsList;
-    let musicIndex = 0;
     
-    wavesurfer.load(audio.src);
-    displayPlaylistItems(playlist);
+    /* 
+    caso o número de itens na playlist seja igual a 0(zero) quando um áudio for carregado, quer dizer que estamos carregando itens pela primeira vez...
+    ... então ele adicionará os items carregados à playlist, se não ele não adicionará   
+    */
+   if(numberOfPlaylistItems === 0) {
+       displayPlaylistItems(playlist);
+       musicIndex = 0;
+    } else {
+        musicIndex = currentSong;
+    }
+
     changeMusicInfo(musicIndex);
+    wavesurfer.load(audio.src);
 }
 
 
@@ -102,7 +112,7 @@ function changeMusicInfo(musicIndex) {
     artist.innerHTML = playlist[musicIndex].artist;
     musicAlbum.innerHTML = playlist[musicIndex].album;
     cover.src = playlist[musicIndex].cover ? playlist[musicIndex].cover : defaultCoverImage;
-    
+
     if(playlist[musicIndex].cover !== defaultCoverImage) {
         body.style.backgroundImage = `url(${playlist[musicIndex].cover})`;
     } else {
@@ -181,4 +191,31 @@ wavesurfer.on('play', ()=> {
 wavesurfer.on('pause', ()=> {
     playPauseIcon.classList.add('bi-play-fill');
     playPauseIcon.classList.remove('bi-pause-fill');
+});
+
+wavesurfer.on('decode', ()=> {
+    // quando a musica terminar de ser carregada pelo wavesurfer
+    if(wavesurfer.isPlaying() === false)
+        wavesurfer.play();
+});
+
+wavesurfer.on('finish', ()=> {
+    // se não for a ultima música busque a próxima
+    let song;
+    // let actualTime = wavesurfer.getDuration() - wavesurfer.getCurrentTime();
+
+    console.log(wavesurfer.getDuration())
+    
+    if(currentSong < playlist.length - 1) {
+        currentSong ++;
+        song = URL.createObjectURL(playlist[currentSong].url);
+        wavesurfer.load(song);
+        changeMusicInfo(currentSong);
+    } else {
+        currentSong = 0;
+        song = URL.createObjectURL(playlist[currentSong].url);
+        wavesurfer.load(song);
+        // não tenho a certeza se funciona, verei quando resolver a questão da playlist
+        wavesurfer.stop();
+    }
 });

@@ -55,8 +55,7 @@ displaySelectionOptionButton.onclick = function() {
         checkboxContainer.forEach(
             (checkbox)=> {
                 checkbox.style.display = 'none';
-            },
-            console.log('Hi')
+            }
         )
         musicArt.forEach(
             (image)=> {

@@ -1,5 +1,7 @@
+const playlistContainer = document.querySelector('.playlist-container');
+let currentSong = 0;
+
 function displayPlaylistItems(playlist) {
-    const playlistContainer = document.querySelector('.playlist-container');
     
     for (let index = 0; index < playlist.length; index++) {
         // create list items
@@ -40,8 +42,17 @@ function displayPlaylistItems(playlist) {
         li.appendChild(checkboxContainer);
         li.appendChild(musicArt);
         li.appendChild(musicInfo);
+        li.addEventListener('click', function () {
+            loadSelectSong(this.id);
+        });
 
         // add the item to playlist container
         playlistContainer.appendChild(li);
     }
+}
+
+function loadSelectSong(songIndex) {
+    currentSong = songIndex;
+    song = URL.createObjectURL(uploadedMusicList.songsList[currentSong].url);
+    audio.src = song;
 }
