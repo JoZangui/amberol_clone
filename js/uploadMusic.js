@@ -44,7 +44,6 @@ function uploadMusic(songs) {
                     let cover;
                     try {
                         // obtem a imagem de capa da música
-                        console.log('success!');
                         const data = tag.tags.picture.data
                         const format = tag.tags.picture.format
                         let base64String = ''

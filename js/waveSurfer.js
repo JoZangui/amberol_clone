@@ -40,7 +40,7 @@ audio.onloadedmetadata = () => {
     
     /* 
     caso o número de itens na playlist seja igual a 0(zero) quando um áudio for carregado, quer dizer que estamos carregando itens pela primeira vez...
-    ... então ele adicionará os items carregados à playlist, se não ele não adicionará   
+    ... então ele adicionará os items carregados à playlist, se não ele não adicionará novos itens a playlist 
     */
    if(numberOfPlaylistItems === 0) {
        displayPlaylistItems(playlist);
@@ -74,7 +74,7 @@ playPauseButton.onclick = ()=> {
 backwardButton.onclick = () => {
     let song;
     
-    if (currentSong >= 0) {
+    if (currentSong > 0) {
         currentSong--;
         song = URL.createObjectURL(playlist[currentSong].url);
 
@@ -193,29 +193,21 @@ wavesurfer.on('pause', ()=> {
     playPauseIcon.classList.remove('bi-pause-fill');
 });
 
+// quando a música terminar de ser carregada pelo wavesurfer ele vai reproduzir
 wavesurfer.on('decode', ()=> {
-    // quando a musica terminar de ser carregada pelo wavesurfer
     if(wavesurfer.isPlaying() === false)
         wavesurfer.play();
 });
 
 wavesurfer.on('finish', ()=> {
+    let song;    
     // se não for a ultima música busque a próxima
-    let song;
-    // let actualTime = wavesurfer.getDuration() - wavesurfer.getCurrentTime();
-
-    console.log(wavesurfer.getDuration())
-    
     if(currentSong < playlist.length - 1) {
         currentSong ++;
         song = URL.createObjectURL(playlist[currentSong].url);
         wavesurfer.load(song);
         changeMusicInfo(currentSong);
-    } else {
-        currentSong = 0;
-        song = URL.createObjectURL(playlist[currentSong].url);
-        wavesurfer.load(song);
-        // não tenho a certeza se funciona, verei quando resolver a questão da playlist
+    }else {
         wavesurfer.stop();
     }
 });
