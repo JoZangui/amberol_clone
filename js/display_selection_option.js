@@ -49,7 +49,7 @@ selectAllButton.onclick = ()=> {
 }
 
 displaySelectionOptionButton.onclick = function() {
-    if (this.classList.contains('active')) {
+    if (this.classList.contains('select-option--active')) {
         playlistFooter.style.display = 'none';
 
         checkboxContainer.forEach(
@@ -63,7 +63,7 @@ displaySelectionOptionButton.onclick = function() {
             }
         )
 
-        this.classList.remove('active');
+        this.classList.remove('select-option--active');
         removeAllCheckedInput();
     } else {
         playlistFooter.style.display = 'flex';
@@ -80,7 +80,7 @@ displaySelectionOptionButton.onclick = function() {
             }
         )
 
-        this.classList.add('active');
+        this.classList.add('select-option--active');
     }
 }
 
@@ -98,11 +98,11 @@ checkboxInputList.map((input)=> {
 
 
 displaySearchBarButton.onclick = function() {
-    if (this.classList.contains('active')) {
+    if (this.classList.contains('select-option--active')) {
         searchBarContainer.style.display = 'none';
-        this.classList.remove('active');
+        this.classList.remove('select-option--active');
     } else {
         searchBarContainer.style.display = 'flex';
-        this.classList.add('active');
+        this.classList.add('select-option--active');
     }
 }

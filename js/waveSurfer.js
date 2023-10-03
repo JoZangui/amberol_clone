@@ -19,6 +19,8 @@ const playPauseIcon = document.querySelector('.play-pause--icon');
 const backwardButton = document.querySelector('.backward-button');
 const forwardButton = document.querySelector('.forward-button');
 const volumeBarInput = document.querySelector('#volume-bar');
+const repeatButton = document.querySelector('.repeat--button');
+const shuffleButton = document.querySelector('.shuffle--button');
 var fill = document.querySelector('.fill');
 let defaultVolumeValue = volumeBarInput.value / 100
 let playlist;
@@ -60,7 +62,7 @@ a barra de preencimento começa já com o valor predefinido no volumeBar input(a
 fill.style.width = volumeBarInput.value + '%';
 wavesurfer.setVolume(defaultVolumeValue);
 
-
+/* player controlers */
 playPauseButton.onclick = ()=> {
     let isPlaying = wavesurfer.isPlaying();
     
@@ -86,26 +88,76 @@ backwardButton.onclick = () => {
 forwardButton.onclick = () => {
     let song;
     
-    if (currentSong < playlist.length-1) {
+    // se a função aleatório estiver activo escolhe uma música aleatória na playlist
+    if (isShuffleOn()) {
+        currentSong = GetRandomSong();
+    } else if (currentSong < playlist.length-1) { // se não, passe para a próxima música
         currentSong++;
-        song = URL.createObjectURL(playlist[currentSong].url);
-
-        wavesurfer.load(song);
-        changeMusicInfo(currentSong);
     }
+
+    song = URL.createObjectURL(playlist[currentSong].url);
+    wavesurfer.load(song);
+    changeMusicInfo(currentSong);
 }
+
 
 volumeBarInput.oninput = ()=> {
     let currentVolume = volumeBarInput.value / 100;
     wavesurfer.setVolume(currentVolume);
-
+    
     /*
-        muda a largura do preenchimento
-        da barra de volume(apenas para o chrome)
+    muda a largura do preenchimento
+    da barra de volume(apenas para o chrome)
     */
-    fill.style.width = volumeBarInput.value + '%';
+   fill.style.width = volumeBarInput.value + '%';
 }
 
+shuffleButton.onclick = ()=> {
+    let shuffleButtonIsOn = shuffleButton.classList.contains('shuffle-on');
+    const shuffleIcon = document.querySelector('.shuffle-icon');
+    
+    if (shuffleButtonIsOn) {
+        shuffleButton.classList.remove('shuffle-on');
+        shuffleIcon.classList.remove('option-buttons--active');
+    } else {
+        shuffleButton.classList.add('shuffle-on');
+        shuffleIcon.classList.add('option-buttons--active');
+    }
+}
+
+function GetRandomSong() {
+    let maxVal = playlist.length - 1;
+    let randomNumber = Math.floor(Math.random() * maxVal);
+
+    return randomNumber;
+}
+
+function isShuffleOn() {
+    let shuffleButtonState = shuffleButton.classList.contains('shuffle-on');
+
+    if (shuffleButtonState === true) {
+        return true;
+    }
+    return false;
+}
+
+repeatButton.onclick = function() {
+    const repeatIcon = document.querySelector('.repeat--icon');
+    let iconType = repeatIcon.innerText;
+
+    if (iconType === 'arrow_forward') {
+        repeatIcon.innerText = 'repeat';
+        repeatIcon.classList.add('option-buttons--active');
+    } else if (iconType === 'repeat') {
+        repeatIcon.innerText = 'repeat_one';
+        repeatIcon.classList.add('option-buttons--active');
+    } else {
+        repeatIcon.innerText = 'arrow_forward';
+        repeatIcon.classList.remove('option-buttons--active');
+    }
+}
+
+/* others function */
 function changeMusicInfo(musicIndex) {
     let defaultCoverImage = '../images/default-cover-image.png'
     musicTitle.innerHTML = playlist[musicIndex].title;
@@ -167,20 +219,23 @@ function displayCurrentDuration() {
     durationSpan.innerHTML = `-${time.minutes}:${time.seconds}`;
 }
 
+/* events */
 wavesurfer.on('audioprocess', () => {
     displayCurrentTime();
     displayCurrentDuration();
 });
 
+// When the audio is both decoded and can play
 wavesurfer.on('ready', ()=> {
     // apresenta a duração da música
-    
     let durationSpan = document.querySelector('.duration--span');
     let duration = wavesurfer.getDuration();
-    
     let time = convertTimeToSecMinHour(duration);
-
     durationSpan.innerHTML = `${time.minutes}:${time.seconds}`;
+    
+    // se não estiver a reproduzir reproduz a música
+    if(wavesurfer.isPlaying() === false)
+        wavesurfer.play();
 });
 
 wavesurfer.on('play', ()=> {
@@ -193,21 +248,34 @@ wavesurfer.on('pause', ()=> {
     playPauseIcon.classList.remove('bi-pause-fill');
 });
 
-// quando a música terminar de ser carregada pelo wavesurfer ele vai reproduzir
-wavesurfer.on('decode', ()=> {
-    if(wavesurfer.isPlaying() === false)
-        wavesurfer.play();
-});
 
 wavesurfer.on('finish', ()=> {
-    let song;    
+    let song;
+    const repeatIcon = document.querySelector('.repeat--icon');
+    let iconType = repeatIcon.innerText;
+
     // se não for a ultima música busque a próxima
-    if(currentSong < playlist.length - 1) {
-        currentSong ++;
+    if (iconType === 'repeat_one') {
+        wavesurfer.setTime(0);
+        wavesurfer.play();
+        
+    } else if(currentSong < playlist.length - 1) {
+        // se a função aleatório estiver activo escolhe uma música aleatória na playlist
+        if (isShuffleOn()) {
+            currentSong = GetRandomSong();
+        } else { // se não, passe para a próxima música
+            currentSong ++;
+        }
         song = URL.createObjectURL(playlist[currentSong].url);
         wavesurfer.load(song);
         changeMusicInfo(currentSong);
-    }else {
+
+    } else if (iconType === 'repeat') {
+        currentSong = 0;
+        song = URL.createObjectURL(playlist[currentSong].url);
+        wavesurfer.load(song);
+        changeMusicInfo(currentSong);
+    } else {
         wavesurfer.stop();
     }
 });

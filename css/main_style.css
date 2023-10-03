@@ -231,9 +231,12 @@ main {
     border-radius: 50%;
     background-color: #ffffff28;
 }
-.option-buttons button .display-playlist--button {
-    background-color: rgba(252, 252, 252, 0.356);
+.option-buttons button .option-buttons--active {
+    background-color: #ffffff6e;
 }
+/* .option-buttons button {
+    background-color: #ffffff28;
+} */
 .option-buttons button:hover span {
-    background-color: #ffffff38;
+    background-color: rgba(252, 252, 252, 0.527);
 }

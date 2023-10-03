@@ -227,7 +227,7 @@ header .icons  .close-playlist--button {
     background-color: rgba(252, 252, 252, 0.144);
 }
 /* display select option */
-.active {
+.select-option--active {
     background-color: rgba(252, 252, 252, 0.144);
 }
 
