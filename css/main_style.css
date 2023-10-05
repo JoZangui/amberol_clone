@@ -48,11 +48,21 @@ main {
     color: #ffff;
     padding: 10px 0;
 }
+.main--music-info > * {
+    width: 490px;
+    margin: 0 auto;
+    overflow: hidden;
+    /* text-wrap: nowrap;
+    text-overflow: ellipsis; */
+}
 .main--music-info h1 {
+    height: 70px;
     font-family: hindBold;
     font-size: x-large;
+    text-overflow: ellipsis;
 }
 .main--music-info h2, h3 {
+    height: 40px;
     font-family: hindLight;
     font-size: medium;
 }

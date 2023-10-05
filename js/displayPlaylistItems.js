@@ -1,4 +1,4 @@
-const playlistContainer = document.querySelector('.playlist-container');
+const musicList = document.querySelector('.music-list');
 let currentSong = 0;
 
 function displayPlaylistItems(playlist) {
@@ -6,7 +6,7 @@ function displayPlaylistItems(playlist) {
     for (let index = 0; index < playlist.length; index++) {
         // create list items
         const li = document.createElement('li');
-        // checkbox label
+        // checkbox container label
         const checkboxContainer = document.createElement('label');
         // checkbox input
         const checkboxInput = document.createElement('input');
@@ -22,13 +22,15 @@ function displayPlaylistItems(playlist) {
         // set items attributes
         checkboxContainer.setAttribute('class', 'checkbox-container');
         checkboxInput.setAttribute('class', 'checkbox-input');
+        checkboxInput.setAttribute('type', 'checkbox');
+        checkboxInput.setAttribute('id', index);
         checkmark.setAttribute('class', 'checkmark');
         musicArt.setAttribute('class', 'music-art');
         musicInfo.setAttribute('class', 'music-info');
         
         // add the checkbox input and checkbox span icon to checkbox container
-        checkboxContainer.appendChild(checkmark);
         checkboxContainer.appendChild(checkboxInput);
+        checkboxContainer.appendChild(checkmark);
         
         // music cover
         musicCoverImage.src = playlist[index].cover;
@@ -43,12 +45,18 @@ function displayPlaylistItems(playlist) {
         li.appendChild(musicArt);
         li.appendChild(musicInfo);
         li.addEventListener('click', function () {
-            loadSelectSong(this.id);
+            const selectOptionIsOn = displaySelectionOptionButton.classList.contains('select-option--active');
+            // desabilita a opção de carregar música se a opção selecionar música estiver activa
+            if (!selectOptionIsOn) {
+                loadSelectSong(this.id);
+            }
         });
 
         // add the item to playlist container
-        playlistContainer.appendChild(li);
+        musicList.appendChild(li);
     }
+
+    selectMusicOption();
 }
 
 function loadSelectSong(songIndex) {

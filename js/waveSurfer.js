@@ -37,7 +37,7 @@ const wavesurfer = WaveSurfer.create({
 
 audio.onloadedmetadata = () => {
     let musicIndex;
-    let numberOfPlaylistItems = playlistContainer.childElementCount
+    let numberOfPlaylistItems = musicList.childElementCount
     playlist = uploadedMusicList.songsList;
     
     /* 
@@ -91,7 +91,7 @@ forwardButton.onclick = () => {
     // se a função aleatório estiver activo escolhe uma música aleatória na playlist
     if (isShuffleOn()) {
         currentSong = GetRandomSong();
-    } else if (currentSong < playlist.length-1) { // se não, passe para a próxima música
+            } else if (currentSong < playlist.length-1) { // se não, passe para a próxima música
         currentSong++;
     }
 
