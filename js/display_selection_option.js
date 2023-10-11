@@ -6,7 +6,7 @@ function selectMusicOption() {
     const checkboxContainer = document.querySelectorAll('.checkbox-container');
     const checkboxInput = document.querySelectorAll('.checkbox-input');
     const infoTexto = document.querySelector('.info-texto');
-    const removeSongButton = document.querySelector('.delete-button-container');
+    const removeTheSongButton = document.querySelector('.delete-button-container');
     // lista de inputs checkbox
     const checkboxInputList = []
     const selectAllButton = document.querySelector('.select-all--button');
@@ -96,10 +96,22 @@ function selectMusicOption() {
         }
     }
 
-    removeSongButton.onclick = ()=> {
+    removeTheSongButton.onclick = ()=> {
         if(checkedInputs) {
-            for (let index = 0; index < checkedInputs.length; index++) {
-                console.log(checkedInputs[index].id);
+            checkedInputs.forEach((input) => {
+                // obtem o li pai do input
+                let songLi = input.parentElement.parentElement
+                // elimina a música da lista de músicas
+                uploadedMusicList.songsList.splice(input.id, 1);
+                // remove o li da ul(musicList)
+                musicList.removeChild(songLi);
+            });
+            // obtem todos os li's de musicList para poder reordenar os id's
+            let li_s = musicList.querySelectorAll('li');
+            // reordena os id dos li's e dos seus respectivos inputs
+            for (let index = 0; index < li_s.length; index++) {
+                li_s[index].id = index;
+                li_s[index].querySelector('input').id = index;
             }
         }
     }

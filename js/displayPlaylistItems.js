@@ -23,6 +23,7 @@ function displayPlaylistItems(playlist) {
         checkboxContainer.setAttribute('class', 'checkbox-container');
         checkboxInput.setAttribute('class', 'checkbox-input');
         checkboxInput.setAttribute('type', 'checkbox');
+        // definimos um id para o input de modo a corresponder ao seu li na hora de remover da lista a música
         checkboxInput.setAttribute('id', index);
         checkmark.setAttribute('class', 'checkmark');
         musicArt.setAttribute('class', 'music-art');
@@ -40,6 +41,7 @@ function displayPlaylistItems(playlist) {
         musicInfo.innerHTML = `<h1>${playlist[index].title}</h1>
         <h2>${playlist[index].artist}</h2>`;
         
+        // definimos um id para localizar a musica selecionada
         li.setAttribute('id', index);
         li.appendChild(checkboxContainer);
         li.appendChild(musicArt);
