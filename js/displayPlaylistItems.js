@@ -50,7 +50,7 @@ function displayPlaylistItems(playlist) {
             const selectOptionIsOn = displaySelectionOptionButton.classList.contains('select-option--active');
             // desabilita a opção de carregar música se a opção selecionar música estiver activa
             if (!selectOptionIsOn) {
-                loadSelectSong(this.id);
+                loadSelectedSong(this.id);
             }
         });
 
@@ -61,7 +61,7 @@ function displayPlaylistItems(playlist) {
     selectMusicOption();
 }
 
-function loadSelectSong(songIndex) {
+function loadSelectedSong(songIndex) {
     currentSong = songIndex;
     song = URL.createObjectURL(uploadedMusicList.songsList[currentSong].url);
     audio.src = song;

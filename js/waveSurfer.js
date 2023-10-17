@@ -22,8 +22,7 @@ const volumeBarInput = document.querySelector('#volume-bar');
 const repeatButton = document.querySelector('.repeat--button');
 const shuffleButton = document.querySelector('.shuffle--button');
 var fill = document.querySelector('.fill');
-let defaultVolumeValue = volumeBarInput.value / 100
-let playlist;
+let defaultVolumeValue = volumeBarInput.value / 100;
 
 
 const wavesurfer = WaveSurfer.create({
@@ -41,8 +40,8 @@ audio.onloadedmetadata = () => {
     playlist = uploadedMusicList.songsList;
     
     /* 
-    caso o número de itens na playlist seja igual a 0(zero) quando um áudio for carregado, quer dizer que estamos carregando itens pela primeira vez...
-    ... então ele adicionará os items carregados à playlist, se não ele não adicionará novos itens a playlist 
+    caso o número de itens na musicList(ul) seja igual a 0(zero) quando um áudio for carregado, quer dizer que estamos carregando itens pela primeira vez...
+    ... então ele adicionará os items carregados à musicList(ul), se não ele não adicionará novos itens a musicList(ul) 
     */
    if(numberOfPlaylistItems === 0) {
        displayPlaylistItems(playlist);

@@ -1,4 +1,5 @@
 let displaySelectionOptionButton = document.querySelector('.display-selection-option--button');
+let playlist;
 
 function selectMusicOption() {
     const playlistFooter = document.querySelector('.playlist-footer');
@@ -15,7 +16,7 @@ function selectMusicOption() {
     let checkedInputs;
     
     function checkedItems() {
-        // cria uma lista com todos os inputs  com checked igual a true
+        // cria uma lista com todos os inputs com checked igual a true
         checkedInputs = checkboxInputList.filter(
             (input)=> {
                 return input.checked;
@@ -100,19 +101,21 @@ function selectMusicOption() {
         if(checkedInputs) {
             checkedInputs.forEach((input) => {
                 // obtem o li pai do input
-                let songLi = input.parentElement.parentElement
+                let songLi = input.parentElement.parentElement;
                 // elimina a música da lista de músicas
-                uploadedMusicList.songsList.splice(input.id, 1);
+                playlist.splice(input.id, 1);
                 // remove o li da ul(musicList)
                 musicList.removeChild(songLi);
+
+                // obtem todos os li's de musicList para poder reordenar os id's
+                let li_s = musicList.querySelectorAll('li');
+                // reordena os id dos li's e dos seus respectivos inputs
+                for (let index = 0; index < li_s.length; index++) {
+                    li_s[index].id = index;
+                    li_s[index].querySelector('input').id = index;
+                }
             });
-            // obtem todos os li's de musicList para poder reordenar os id's
-            let li_s = musicList.querySelectorAll('li');
-            // reordena os id dos li's e dos seus respectivos inputs
-            for (let index = 0; index < li_s.length; index++) {
-                li_s[index].id = index;
-                li_s[index].querySelector('input').id = index;
-            }
+            removeAllCheckedFromInputs(); // limpa a lista de inputs com checked = true
         }
     }
     
@@ -122,7 +125,7 @@ function selectMusicOption() {
     })
     
     checkboxInputList.map((input)=> {
-        /*
+        /*  
             adiciona um evento onclick à cada input checkbox com a função checkedItems(essa função apresenta quantos inputs têm o checked = True)
         */
         input.onclick = checkedItems
