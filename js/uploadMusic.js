@@ -15,16 +15,15 @@ dropArea.ondragover = (event)=> {
 dropArea.ondrop = (event)=> {
     event.stopPropagation();
     event.preventDefault();
-    const songs = event.dataTransfer.files;
+    const audioFiles = event.dataTransfer.files;
 
-    // uploadedMusicList = songs;
-    uploadMusic(songs);
+    uploadMusic(audioFiles);
 }
 
 function uploadMusic(songs) {
-    let musicDataListPromise
-    const musicDataList = []
-    let errorList = []
+    let musicDataListPromise;
+    const musicDataList = [];
+    let errorList = [];
     
     for (const song of songs) {
         // url da música
