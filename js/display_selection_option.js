@@ -1,4 +1,4 @@
-let displaySelectionOptionButton = document.querySelector('.display-selection-option--button');
+let btnDisplaySelectionOption = document.querySelector('.display-selection-option--button');
 let playlist;
 
 function selectMusicOption() {
@@ -7,11 +7,11 @@ function selectMusicOption() {
     const checkboxContainer = document.querySelectorAll('.checkbox-container');
     const checkboxInput = document.querySelectorAll('.checkbox-input');
     const infoTexto = document.querySelector('.info-texto');
-    const removeTheSongButton = document.querySelector('.delete-button-container');
+    const btnRemoveTheSong = document.querySelector('.delete-button-container');
     // lista de inputs checkbox
     const checkboxInputList = []
-    const selectAllButton = document.querySelector('.select-all--button');
-    const displaySearchBarButton = document.querySelector('.display-search-bar--button');
+    const btnSelectAll = document.querySelector('.select-all--button');
+    const btnDisplaySearchBar = document.querySelector('.display-search-bar--button');
     const searchBarContainer = document.querySelector('.search-bar-container');
     let checkedInputs;
     
@@ -50,7 +50,7 @@ function selectMusicOption() {
         infoTexto.innerHTML = 'Nenhuma múscia selecionada';
     }
     
-    selectAllButton.onclick = ()=> {
+    btnSelectAll.onclick = ()=> {
         checkedInputs = checkboxInputList.map((input)=> {
             input.checked = true;
             return input
@@ -61,7 +61,7 @@ function selectMusicOption() {
             : `${checkedInputs.length} música selecionada`;
     }
     
-    displaySelectionOptionButton.onclick = function() {
+    btnDisplaySelectionOption.onclick = function() {
         if (this.classList.contains('select-option--active')) {
             playlistFooter.style.display = 'none';
     
@@ -97,7 +97,7 @@ function selectMusicOption() {
         }
     }
 
-    removeTheSongButton.onclick = ()=> {
+    btnRemoveTheSong.onclick = ()=> {
         if(checkedInputs) {
             checkedInputs.forEach((input) => {
                 // obtem o li pai do input
@@ -132,7 +132,7 @@ function selectMusicOption() {
     })
     
     
-    displaySearchBarButton.onclick = function() {
+    btnDisplaySearchBar.onclick = function() {
         if (this.classList.contains('select-option--active')) {
             searchBarContainer.style.display = 'none';
             this.classList.remove('select-option--active');

@@ -47,7 +47,7 @@ function displayPlaylistItems(playlist) {
         li.appendChild(musicArt);
         li.appendChild(musicInfo);
         li.addEventListener('click', function () {
-            const selectOptionIsOn = displaySelectionOptionButton.classList.contains('select-option--active');
+            const selectOptionIsOn = btnDisplaySelectionOption.classList.contains('select-option--active');
             // desabilita a opção de carregar música se a opção selecionar música estiver activa
             if (!selectOptionIsOn) {
                 loadSelectedSong(this.id);

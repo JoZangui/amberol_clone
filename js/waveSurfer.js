@@ -1,12 +1,4 @@
 import WaveSurfer from 'https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.esm.js'
-/*
-cria um objecto com os dados da música e
-    adiciona à lista "musicDataList"
-    
-    ------------- IMPORTANTE ----------------------
-    
-    a maioria das músicas baixadas ilegalmente não contém metadados, isso pode gerar um erro ao tentar obeter os dados dessa música.
-*/
 
 const audio = document.querySelector('#audio');
 const musicTitle = document.querySelector('.music-title');
@@ -35,28 +27,30 @@ const wavesurfer = WaveSurfer.create({
 });
 
 audio.onloadedmetadata = () => {
+    /* Carrega a música para o wavesurfer e atualiza a info da música na tela */
     let musicIndex;
     let numberOfPlaylistItems = musicList.childElementCount;
     playlist = songsList;
     
     /* 
-    caso o número de itens na musicList(ul) seja igual a 0(zero) quando um áudio for carregado, quer dizer que estamos carregando itens pela primeira vez...
-    ... então ele adicionará os items carregados à musicList(ul), se não ele não adicionará novos itens a musicList(ul) 
+    caso o número de itens na musicList(ul) seja igual a 0(zero) quando um áudio for carregado, 
+    quer dizer que estamos carregando itens pela primeira vez
+    então ele adicionará os items carregados à musicList(ul), se não ele não adicionará novos itens a musicList(ul) 
     */
    if(numberOfPlaylistItems === 0) {
-       displayPlaylistItems(playlist);
+       displayPlaylistItems(playlist); // apresenta os itens da lista de músicas
        musicIndex = 0;
     } else {
         musicIndex = currentSong;
     }
 
-    changeMusicInfo(musicIndex);
-    wavesurfer.load(audio.src);
+    changeMusicInfo(musicIndex); // muda a informação da música do no player
+    wavesurfer.load(audio.src); // carrega a musica no wavesurfer
 }
 
 
 /*
-a barra de preencimento começa já com o valor predefinido no volumeBar input(apenas para o chrome)
+a barra de preenchimento começa já com o valor predefinido no volumeBar input(apenas para o chrome)
 */
 fill.style.width = volumeBarInput.value + '%';
 wavesurfer.setVolume(defaultVolumeValue);
@@ -90,7 +84,7 @@ forwardButton.onclick = () => {
     // se a função aleatório estiver activo escolhe uma música aleatória na playlist
     if (isShuffleOn()) {
         currentSong = GetRandomSong();
-            } else if (currentSong < playlist.length-1) { // se não, passe para a próxima música
+    } else if (currentSong < playlist.length-1) { // se não, passe para a próxima música
         currentSong++;
     }
 
@@ -173,7 +167,7 @@ function changeMusicInfo(musicIndex) {
 
 function convertTimeToSecMinHour(time) {
     /*
-        convert o tempo dado em segundo
+        converte o tempo dado em segundo
         para hora, minuto e segundo
         -------------------
         retorna um objecto com a hora, minuto e segundo
