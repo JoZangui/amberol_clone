@@ -27,7 +27,7 @@ let defaultVolumeValue = volumeBarInput.value / 100;
 
 const wavesurfer = WaveSurfer.create({
     container: '.waveform',
-    waveColor: 'rgba(252, 252, 252, 0.144)',
+    waveColor: 'rgba(166, 166, 166, 0.79)',
     progressColor: '#ffffff',
     height: 46,
     barWidth: 2,
