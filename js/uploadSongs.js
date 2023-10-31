@@ -1,6 +1,6 @@
 const dropArea = document.querySelector('body');
 const audio = document.querySelector('#audio')
-let uploadedSongInfo = {'songsList': '', 'errorList': []};
+let songsList;
 
 
 // arrastar conteudo para a página
@@ -21,11 +21,11 @@ dropArea.ondrop = (event)=> {
 }
 
 function uploadMusic(songs) {
-    let songDataListPromise;
+    let songsDataPromise;
     const songDataList = [];
-    let errorList = [];
+    const errorList = [];
     
-    songDataListPromise = new Promise((resolve, reject) => {
+    songsDataPromise = new Promise((resolve, reject) => {
         for (const song of songs) {
             // url da música
             let musicFileURL = song;
@@ -77,7 +77,7 @@ function uploadMusic(songs) {
         }
     }).then(function(songs) {
         audio.src = URL.createObjectURL(songs[0].url);
-        uploadedSongInfo.songsList = songs;
+        songsList = songs;
     }).catch((error) => {
         console.log(error);
     });

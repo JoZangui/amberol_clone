@@ -37,7 +37,7 @@ const wavesurfer = WaveSurfer.create({
 audio.onloadedmetadata = () => {
     let musicIndex;
     let numberOfPlaylistItems = musicList.childElementCount;
-    playlist = uploadedSongInfo.songsList;
+    playlist = songsList;
     
     /* 
     caso o número de itens na musicList(ul) seja igual a 0(zero) quando um áudio for carregado, quer dizer que estamos carregando itens pela primeira vez...
