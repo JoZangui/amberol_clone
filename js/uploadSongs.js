@@ -1,6 +1,6 @@
 const dropArea = document.querySelector('body');
 const audio = document.querySelector('#audio')
-let uploadedMusicList = {'songsList': '', 'errorList': ''};
+let uploadedSongInfo = {'songsList': '', 'errorList': []};
 
 
 // arrastar conteudo para a página
@@ -21,15 +21,15 @@ dropArea.ondrop = (event)=> {
 }
 
 function uploadMusic(songs) {
-    let musicDataListPromise;
-    const musicDataList = [];
+    let songDataListPromise;
+    const songDataList = [];
     let errorList = [];
     
-    for (const song of songs) {
-        // url da música
-        let musicFileURL = song;
+    songDataListPromise = new Promise((resolve, reject) => {
+        for (const song of songs) {
+            // url da música
+            let musicFileURL = song;
 
-        musicDataListPromise = new Promise((resolve, reject) => {
             /* 
                 obtem os metadados da música com:
                 - título
@@ -56,7 +56,7 @@ function uploadMusic(songs) {
                     }
 
                     // cria o objecto com as informações recebidas
-                    let musicData = {
+                    let songData = {
                         title: tag.tags.title,
                         artist: tag.tags.artist,
                         album: tag.tags.album,
@@ -65,20 +65,20 @@ function uploadMusic(songs) {
                     }
                     
                     // adiciona os dados da música a lista de dados
-                    musicDataList.push(musicData)
-                    resolve({'songs': musicDataList, 'errList': errorList});
+                    songDataList.push(songData)
+                    resolve(songDataList);
                 },
                 onError: (error) => {
-                    reject(error);
+                    let errorDetails = {songName: song.name, errorinfo: error.info}
+                    errorList.push(errorDetails);
+                    reject(errorList);
                 }
             });
-        })
-    }
-    musicDataListPromise.then(function(result) {
-        audio.src = URL.createObjectURL(result.songs[0].url);
-        uploadedMusicList.songsList = result.songs;
-        // uploadedMusicList.errorList = values.errList;
-    }).catch(err => {
-        console.log(err);
+        }
+    }).then(function(songs) {
+        audio.src = URL.createObjectURL(songs[0].url);
+        uploadedSongInfo.songsList = songs;
+    }).catch((error) => {
+        console.log(error);
     });
 }

@@ -63,6 +63,6 @@ function displayPlaylistItems(playlist) {
 
 function loadSelectedSong(songIndex) {
     currentSong = songIndex;
-    song = URL.createObjectURL(uploadedMusicList.songsList[currentSong].url);
+    song = URL.createObjectURL(uploadedSongInfo.songsList[currentSong].url);
     audio.src = song;
 }
