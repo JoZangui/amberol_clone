@@ -49,7 +49,7 @@
                 <!-- list items here -->
             </ul>
             <footer class="playlist-footer">
-                <div class="select-all-button-container" title="selecionar todas as músicas">
+                <div class="select-all-button-container" title="selecionar todas as música(s)">
                     <span class="material-symbols-outlined select-all--button">
                         select_all
                     </span>
@@ -76,7 +76,7 @@
             <!-- Music info -->
             <div class="main--music-info">
                 <h1 class="music-title">--</h1>
-                <h2 class="artist">Arraste as músicas do seu directório para aqui</h2>
+                <h2 class="artist">Arraste a(s) música(s) do seu directório para aqui</h2>
                 <h3 class="music-album">--</h3>
             </div>
     
@@ -144,14 +144,34 @@
                     </button>
                 </div>
             </div>
+            <div class="info-container" style="display: none;">
+                <div class="info">
+                    <div class="btn-close--Container">
+                        <button class="btn-close">
+                            <span class="material-symbols-outlined btn-close--icon">
+                                close
+                            </span>
+                        </button>
+                    </div>
+                    <div class="info-text">
+                        <p>
+                            Houve uma falha ao tentar carregar a(s) música(s):
+                        </p>
+                    </div>
+                    <!-- lista de uploads falhados -->
+                    <div class="failed-uploads--container">
+                        <ul class="failed-uploads--list">
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
     <!-- meus scripst -->
     
-    <script src="js/display_selection_option.js"></script>
-    <script src="js/change_container_background_image.js"></script>
-    <script src="js/display_playlist.js"></script>
+    <script src="js/SelectSongOption.js"></script>
+    <script src="js/displayPlaylist.js"></script>
     <script src="js/uploadSongs.js"></script>
     <script src="js/displayPlaylistItems.js"></script>
 

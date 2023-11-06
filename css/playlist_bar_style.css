@@ -94,7 +94,7 @@ header .icons  .close-playlist--button {
     outline: none;
     background-color: transparent;
 }
-/* chrome */
+/* scrollbar chrome */
 .playlist ul::-webkit-scrollbar {
     width: 7px;
     border-radius: 12px;

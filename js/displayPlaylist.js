@@ -2,11 +2,6 @@ let displayPlaylistButton = document.querySelector('.display-playlist--icon');
 let closePlaylistButton = document.querySelector('.close-playlist--button');
 let playlistContainer = document.querySelector('.playlist');
 
-playlistContainer.onresize = () => {
-    console.log(playlistContainer.computedStyleMap.width);
-}
-
-
 function displayAndClosePlayList() {
     let windowWidth = window.innerWidth;
     

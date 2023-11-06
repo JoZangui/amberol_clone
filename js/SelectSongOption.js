@@ -1,7 +1,7 @@
 let btnDisplaySelectionOption = document.querySelector('.display-selection-option--button');
 let playlist;
 
-function selectMusicOption() {
+function selectTheSongToRemove() {
     const playlistFooter = document.querySelector('.playlist-footer');
     const musicArt = document.querySelectorAll('.music-art');
     const checkboxContainer = document.querySelectorAll('.checkbox-container');

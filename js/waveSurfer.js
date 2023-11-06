@@ -26,8 +26,8 @@ const wavesurfer = WaveSurfer.create({
     barGap: 2,
 });
 
+/* Carrega a música para o wavesurfer e atualiza a info da música na tela */
 audio.onloadedmetadata = () => {
-    /* Carrega a música para o wavesurfer e atualiza a info da música na tela */
     let musicIndex;
     let numberOfPlaylistItems = musicList.childElementCount;
     playlist = songsList;
@@ -212,7 +212,7 @@ function displayCurrentDuration() {
     durationSpan.innerHTML = `-${time.minutes}:${time.seconds}`;
 }
 
-/* events */
+/* wavesurfer events */
 wavesurfer.on('audioprocess', () => {
     displayCurrentTime();
     displayCurrentDuration();

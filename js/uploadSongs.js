@@ -89,7 +89,26 @@ function uploadMusic(songs) {
         */
         audio.src = URL.createObjectURL(songs[0].url);
         songsList = songs;
-    }).catch((error) => {
-        console.log(error);
+    }).catch((errorList) => {
+        displayInfoMessage(errorList);
     });
+}
+
+function displayInfoMessage(infoDetail) {
+    const infoContainer = document.querySelector('.info-container');
+    const failedUploadsList = document.querySelector('.failed-uploads--list');
+    const btnClose = document.querySelector('.btn-close');
+
+    btnClose.onclick = () => {
+        infoContainer.style.display = 'none';
+    }
+
+    if(infoDetail.length !== 0) {
+        for (let index = 0; index < infoDetail.length; index++) {
+            let li = document.createElement('li');
+            li.innerHTML = infoDetail[index].songName;
+            failedUploadsList.appendChild(li);
+        }
+    }
+    infoContainer.style.display = 'flex';
 }

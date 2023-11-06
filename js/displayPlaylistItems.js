@@ -4,22 +4,22 @@ let currentSong = 0;
 function displayPlaylistItems(playlist) {
     
     for (let index = 0; index < playlist.length; index++) {
-        // create list items
+        // cria um item de lista (li)
         const li = document.createElement('li');
-        // checkbox container label
+        // cria um label que será o container do checkbox
         const checkboxContainer = document.createElement('label');
         // checkbox input
         const checkboxInput = document.createElement('input');
-        // span with check icon
+        // span com o icon check
         const checkmark = document.createElement('span');
-        // div for music cover
+        // div para capa da música
         const musicArt = document.createElement('div');
-        // music cover image
+        // imagem da capa da música
         const musicCoverImage = document.createElement('img');
-        // div for the music info
+        // div para informação da música
         const musicInfo = document.createElement('div');
         
-        // set items attributes
+        // configurando os atributos dos elementos criados
         checkboxContainer.setAttribute('class', 'checkbox-container');
         checkboxInput.setAttribute('class', 'checkbox-input');
         checkboxInput.setAttribute('type', 'checkbox');
@@ -29,11 +29,11 @@ function displayPlaylistItems(playlist) {
         musicArt.setAttribute('class', 'music-art');
         musicInfo.setAttribute('class', 'music-info');
         
-        // add the checkbox input and checkbox span icon to checkbox container
+        // adiciona o checkbox input e o icon de checkbox ao container do checkbox
         checkboxContainer.appendChild(checkboxInput);
         checkboxContainer.appendChild(checkmark);
         
-        // music cover
+        // capa da música
         musicCoverImage.src = playlist[index].cover;
         
         musicArt.appendChild(musicCoverImage);
@@ -48,19 +48,21 @@ function displayPlaylistItems(playlist) {
         li.appendChild(musicInfo);
         li.addEventListener('click', function () {
             const selectOptionIsOn = btnDisplaySelectionOption.classList.contains('select-option--active');
-            // desabilita a opção de carregar música se a opção selecionar música estiver activa
+            // desabilita a opção de carregar música se a opção selecionar música para remoção estiver activa
             if (!selectOptionIsOn) {
                 loadSelectedSong(this.id);
             }
         });
 
-        // add the item to playlist container
+        // adiciona o item a lista musicList(ul)
         musicList.appendChild(li);
     }
 
-    selectMusicOption();
+    // activa a opção de seleção de música(s) para remover
+    selectTheSongToRemove();
 }
 
+// carrega música selecionada pelo usuário na playlist
 function loadSelectedSong(songIndex) {
     currentSong = songIndex;
     song = URL.createObjectURL(songsList[currentSong].url);

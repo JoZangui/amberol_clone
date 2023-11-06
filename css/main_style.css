@@ -244,9 +244,76 @@ main {
 .option-buttons button .option-buttons--active {
     background-color: #ffffff6e;
 }
-/* .option-buttons button {
-    background-color: #ffffff28;
-} */
 .option-buttons button:hover span {
     background-color: rgba(252, 252, 252, 0.527);
+}
+.info-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.info {
+    width: 370px;
+    /* height: 90px; */
+    position: absolute;
+    bottom: 7%;
+    font-family: hindBold;
+    text-align: left;
+    color: #ffff;
+    padding: 5px 0 0;
+    border-radius: 12px;
+    border: 1px solid #434343;
+    overflow: hidden;
+    background-color: #272727;
+    z-index: 99;
+}
+.info-text {
+    padding: 0 12px;
+}
+.btn-close--Container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 12px;
+}
+.btn-close {
+    height: 30px;
+    color: #ffff;
+    padding: 3px;
+    border: none;
+    border-radius: 100%;
+    box-sizing: border-box;
+    transition: background .2s ease-in;
+    background-color: unset;
+}
+.btn-close:hover {
+    background-color: #434343;
+}
+
+.failed-uploads--container {
+    color: #ffff;
+}
+.failed-uploads--container ul {
+    list-style: circle;
+}
+.failed-uploads--container ul li {
+    font-family: hindLight;
+    font-size: 12pt;
+    padding: 0px 12px 14px;
+}
+
+.btn-ver-mais--Container {
+    max-width: 100%;
+    overflow: hidden;
+    border-top: 1px solid #434343;
+    background-color: #272727;
+}
+.btn-ver-mais--Container button {
+    width: 100%;
+    height: 30px;
+    color: #ffff;
+    border: none;
+    background-color: #272727;
+}
+.btn-ver-mais--Container button:hover {
+    background-color: #212121;
 }
