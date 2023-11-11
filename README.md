@@ -49,7 +49,7 @@ Ao baixar os arquivos via Github você poderá inciar a app pelo **Visual studio
 
 ## Desenvolvedor
 <div style="width: 100px; overflow: hidden; border-radius: 100%">
-    <img src="https://avatars.githubusercontent.com/u/82146261?v=4">
+    <img src="https://avatars.githubusercontent.com/u/82146261?v=4" width="100">
 </div>
 
 [Joaquim Zangui](https://github.com/JoZangui)
