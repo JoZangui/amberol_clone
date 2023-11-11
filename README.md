@@ -31,7 +31,7 @@ O sistema permite arrastar músicas do seu directório para app, reproduzir, rec
 `Funcionalidade 4:` O usuário também poderá ocultar e exibir a playlist, pesquisar e selecionar músicas da playlist para remoção
 
 ## Aplicação
-<img src="images\Video-para-exemplo-no-README-do-Github-VERSAO-GIF.gif"/>
+<img src="https://photos.google.com/u/1/photo/AF1QipPOMuIQLnvJ-UtXdhZfrW-LXsBK7fUP0hdfw09P"/>
 
 ## Ferramentas usadas
 <div style="display: flex">
