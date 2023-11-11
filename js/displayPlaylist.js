@@ -2,7 +2,7 @@ let displayPlaylistButton = document.querySelector('.display-playlist--icon');
 let closePlaylistButton = document.querySelector('.close-playlist--button');
 let playlistContainer = document.querySelector('.playlist');
 
-function displayAndClosePlayList() {
+function ShowOrHideThePlaylist() {
     let windowWidth = window.innerWidth;
     
     if(windowWidth <= 1028) {
@@ -16,8 +16,8 @@ function displayAndClosePlayList() {
     }
 }
 
-window.onresize = displayAndClosePlayList
-window.onload = displayAndClosePlayList
+window.onresize = ShowOrHideThePlaylist;
+window.onload = ShowOrHideThePlaylist;
 
 displayPlaylistButton.onclick = ()=> {
     let playlistIsOff = playlistContainer.classList.contains('playlist-off');
